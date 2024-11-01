@@ -1,0 +1,38 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccountTier": {
+            "type": "string",
+            "metadata": {
+                "description": "Tier of storage account"
+            },
+            "defaultValue": "Premium",
+            "allowedValues": [
+                "Premium",
+                "Standard"
+            ]
+        }
+    },
+    "functions": [],
+    "variables": {
+        "resourceName": "pahulDemoresource"
+    },
+    "resources": [
+        {
+            "name": "[variables('resourceName')]",
+            "type": "Microsoft.Storage/storageAccounts", // this is for arm
+            "apiVersion": "2023-04-01",
+            "tags": {
+                "displayName": "pahulkalsey03"
+            },
+            "location": "[resourceGroup().location]", // for arm
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "[parameters('storageAccountTier')]"
+            }
+        }
+    ],
+    "outputs": {}
+}
